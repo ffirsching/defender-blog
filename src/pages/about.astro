@@ -1,0 +1,44 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Layout from "../layouts/Layout.astro";
+
+const carDetails = {
+    MY: 2008,
+    wheelBase: 110,
+    engine: "2.4L Puma",
+    color: "black",
+};
+
+const ownerDetails = {
+    name: "Felix Gil",
+    age: 30,
+    location: "Hamburg, Germany",
+    profession: "Software Engineer",
+};
+---
+
+<Layout>
+    <Navigation />
+    <h1>About</h1>
+    <h2>The car</h2>
+    <p>
+        My Defender is a {carDetails.color} <span class="defender-color"></span> {carDetails.MY} Defender 110 with a {carDetails.engine}
+        engine.
+    </p>
+    <h2>The man</h2>
+    <p>
+        My name is {ownerDetails.name}, I am {ownerDetails.age} years old and I
+        live in {ownerDetails.location}. I work as a {ownerDetails.profession}.
+    <h2>The adventures</h2>
+</Layout>
+
+<style define:vars={{carColor: carDetails.color}}>
+    .defender-color {
+        background-color: var(--carColor);
+        height: 1rem;
+        width: 1rem;
+        display: inline-block;
+        border-radius: 50%;
+    }
+
+</style>
