@@ -73,3 +73,6 @@ public/
 *.ntvs*
 *.njsproj
 *.sln
+
+# astro fils
+.astro/
