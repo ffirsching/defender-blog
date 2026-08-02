@@ -74,5 +74,6 @@ public/
 *.njsproj
 *.sln
 
-# astro fils
+# astro files
 .astro/
+/.astro
