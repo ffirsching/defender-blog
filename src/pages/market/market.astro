@@ -1,0 +1,1122 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import data from "../../../scraper/data/comparis-listings.json" with { type: "json" };
+import YearPriceBoxplot from "./yearPriceBoxplot.astro";
+import PriceMileageScatter from "./priceMileageScatter.astro";
+
+type Listing = {
+  title: string;
+  url: string;
+  scrapedAt: string;
+  priceChf?: number;
+  mileageKm?: number;
+  year?: number;
+  location?: string;
+  type?: string;
+  model?: string;
+  createDate?: string;
+};
+
+const listings = (data as Listing[]).filter(
+  (listing) => listing.priceChf && listing.priceChf > 0,
+);
+const activeCount = listings.length;
+
+function percentile(values: number[], fraction: number) {
+  if (!values.length) return 0;
+  const index = (values.length - 1) * fraction;
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  const weight = index - lower;
+  return values[upper] === undefined
+    ? values[lower]
+    : values[lower] + (values[upper] - values[lower]) * weight;
+}
+
+const sortedPrices = listings
+  .map((listing) => listing.priceChf!)
+  .sort((a, b) => a - b);
+const medianAskingPrice = percentile(sortedPrices, 0.5);
+const q1Price = percentile(sortedPrices, 0.25);
+const q3Price = percentile(sortedPrices, 0.75);
+const priceIqr = q3Price - q1Price;
+
+const byYear = new Map<number, number[]>();
+const yearMileage = new Map<number, number[]>();
+const pricePerThousandKm = listings
+  .filter((listing) => listing.mileageKm && listing.mileageKm > 0)
+  .map((listing) => listing.priceChf! / (listing.mileageKm! / 1000));
+
+listings.forEach((listing) => {
+  if (listing.year) {
+    const bucket = byYear.get(listing.year) ?? [];
+    bucket.push(listing.priceChf!);
+    byYear.set(listing.year, bucket);
+
+    if (listing.mileageKm && listing.mileageKm > 0) {
+      const mileages = yearMileage.get(listing.year) ?? [];
+      mileages.push(listing.mileageKm);
+      yearMileage.set(listing.year, mileages);
+    }
+  }
+});
+
+const yearStats = Array.from(byYear.entries())
+  .sort(([a], [b]) => a - b)
+  .map(([year, prices]) => ({
+    year,
+    count: prices.length,
+    median: percentile(
+      prices.sort((a, b) => a - b),
+      0.5,
+    ),
+  }));
+
+const yearMedianValues = yearStats
+  .map((stat) => stat.median)
+  .sort((a, b) => a - b);
+const yearMedianAverage = percentile(yearMedianValues, 0.5);
+const yearMedianQ1 = percentile(yearMedianValues, 0.25);
+const yearMedianQ3 = percentile(yearMedianValues, 0.75);
+const yearMedianIqr = yearMedianQ3 - yearMedianQ1;
+
+const yearPriceGroups = Array.from(byYear.entries())
+  .sort(([a], [b]) => a - b)
+  .map(([year, prices]) => {
+    const sorted = [...prices].sort((a, b) => a - b);
+
+    const q1 = percentile(sorted, 0.25);
+    const median = percentile(sorted, 0.5);
+    const q3 = percentile(sorted, 0.75);
+
+    const iqr = q3 - q1;
+    const lowerFence = q1 - 1.5 * iqr;
+    const upperFence = q3 + 1.5 * iqr;
+
+    const outliers = sorted.filter(
+      (price) => price < lowerFence || price > upperFence,
+    );
+
+    const whiskerLow = sorted.find((price) => price >= lowerFence) ?? sorted[0];
+
+    const whiskerHigh =
+      [...sorted].reverse().find((price) => price <= upperFence) ??
+      sorted[sorted.length - 1];
+
+    const mileage = yearMileage.get(year) ?? [];
+
+    const averageMileage =
+      mileage.length > 0
+        ? Math.round(
+            mileage.reduce((sum, value) => sum + value, 0) / mileage.length,
+          )
+        : null;
+
+    return {
+      year,
+      count: sorted.length,
+      min: whiskerLow,
+      q1,
+      median,
+      q3,
+      max: whiskerHigh,
+      outliers,
+      averageMileage,
+      chartPoint: sorted.length < 3 ? median : null,
+    };
+  });
+
+const boxplotLabels = yearPriceGroups.map((g) => String(g.year));
+
+const boxplotData = yearPriceGroups.map((group) =>
+  group.count >= 3
+    ? {
+        min: group.min,
+        q1: group.q1,
+        median: group.median,
+        q3: group.q3,
+        max: group.max,
+        outliers: group.outliers,
+        count: group.count,
+        averageMileage: group.averageMileage,
+      }
+    : null,
+);
+
+const insufficientYearPoints = yearPriceGroups
+  .filter((group) => group.count < 3)
+  .map((group) => ({
+    x: boxplotLabels.indexOf(String(group.year)),
+    y: group.chartPoint ?? 0,
+    count: group.count,
+  }));
+
+const highestBoxValue = Math.max(
+  ...yearPriceGroups.map((g) => g.max),
+  ...yearPriceGroups.map((g) => g.chartPoint ?? 0),
+  0,
+);
+
+const averagePricePerThousandKm = pricePerThousandKm.length
+  ? pricePerThousandKm.reduce((sum, value) => sum + value, 0) /
+    pricePerThousandKm.length
+  : 0;
+const medianPricePerThousandKm = percentile(
+  pricePerThousandKm.sort((a, b) => a - b),
+  0.5,
+);
+
+function parseCanton(location?: string) {
+  if (!location) return "Unknown";
+  const match = location.match(/\(([^)]+)\)/);
+  if (match) return match[1];
+  return location.split("/")[0].trim();
+}
+
+const typeCounts = new Map<string, number>();
+const locationCounts = new Map<string, number>();
+const weekCounts = new Map<string, number>();
+const mileages = listings
+  .filter((listing) => listing.mileageKm && listing.mileageKm > 0)
+  .map((listing) => listing.mileageKm!)
+  .sort((a, b) => a - b);
+
+const mileageMedian = percentile(mileages, 0.5);
+const mileageQ1 = percentile(mileages, 0.25);
+const mileageQ3 = percentile(mileages, 0.75);
+const mileageIqr = mileageQ3 - mileageQ1;
+
+const mileageBuckets = [
+  { label: "<50k km", min: 0, max: 50000 },
+  { label: "50–100k km", min: 50000, max: 100000 },
+  { label: "100–150k km", min: 100000, max: 150000 },
+  { label: "150–200k km", min: 150000, max: 200000 },
+  { label: "200k+ km", min: 200000, max: Infinity },
+].map((range) => {
+  const bucketPrices = listings
+    .filter(
+      (listing) =>
+        listing.priceChf &&
+        listing.priceChf > 0 &&
+        listing.mileageKm &&
+        listing.mileageKm > 0 &&
+        listing.mileageKm > range.min &&
+        listing.mileageKm <= range.max,
+    )
+    .map((listing) => listing.priceChf!)
+    .sort((a, b) => a - b);
+
+  return {
+    label: range.label,
+    count: bucketPrices.length,
+    medianPrice: bucketPrices.length ? percentile(bucketPrices, 0.5) : null,
+  };
+});
+
+const now = new Date();
+const dayMs = 1000 * 60 * 60 * 24;
+const ageDays = listings
+  .map((listing) => {
+    if (!listing.createDate) return undefined;
+    const created = new Date(listing.createDate);
+    if (Number.isNaN(created.valueOf())) return undefined;
+    return Math.max(0, Math.round((now.valueOf() - created.valueOf()) / dayMs));
+  })
+  .filter((value): value is number => typeof value === "number");
+
+listings.forEach((listing) => {
+  const type = listing.type ?? listing.model ?? "Unknown";
+  typeCounts.set(type, (typeCounts.get(type) ?? 0) + 1);
+
+  const canton = parseCanton(listing.location);
+  locationCounts.set(canton, (locationCounts.get(canton) ?? 0) + 1);
+
+  if (listing.createDate) {
+    const created = new Date(listing.createDate);
+    if (!Number.isNaN(created.valueOf())) {
+      const weekIndex = Math.floor(created.valueOf() / (7 * dayMs));
+      const weekKey = `${created.getFullYear()}-W${weekIndex}`;
+      weekCounts.set(weekKey, (weekCounts.get(weekKey) ?? 0) + 1);
+    }
+  }
+});
+
+const averageDaysOnMarket = ageDays.length
+  ? Math.round(ageDays.reduce((sum, value) => sum + value, 0) / ageDays.length)
+  : 0;
+
+const recentWeeks = Array.from(weekCounts.entries())
+  .sort(([a], [b]) => a.localeCompare(b))
+  .slice(-8)
+  .map(([week, count]) => ({ week, count }));
+
+const typeAvailability = Array.from(typeCounts.entries())
+  .sort(([, a], [, b]) => b - a)
+  .slice(0, 8);
+
+const modelSegmentation = Array.from(typeCounts.entries())
+  .sort(([, a], [, b]) => b - a)
+  .map(([model, count]) => {
+    const modelListings = listings.filter(
+      (listing) => (listing.type ?? listing.model ?? "Unknown") === model,
+    );
+    const prices = modelListings
+      .filter((listing) => listing.priceChf && listing.priceChf > 0)
+      .map((listing) => listing.priceChf!)
+      .sort((a, b) => a - b);
+    const mileages = modelListings
+      .filter((listing) => listing.mileageKm && listing.mileageKm > 0)
+      .map((listing) => listing.mileageKm!)
+      .sort((a, b) => a - b);
+
+    return {
+      model,
+      count,
+      medianPrice: prices.length ? percentile(prices, 0.5) : null,
+      medianMileage: mileages.length ? percentile(mileages, 0.5) : null,
+    };
+  });
+const models = Array.from(typeCounts.keys());
+
+const cantonModelMatrix = Array.from(locationCounts.keys()).map((canton) => {
+  const row: Record<string, number | string> = { canton };
+
+  models.forEach((model) => {
+    row[model] = listings.filter(
+      (listing) =>
+        parseCanton(listing.location) === canton &&
+        (listing.type ?? listing.model ?? "Unknown") === model,
+    ).length;
+  });
+
+  row.total = locationCounts.get(canton) ?? 0;
+
+  return row;
+});
+
+const topCantons = Array.from(locationCounts.entries())
+  .sort(([, a], [, b]) => b - a)
+  .slice(0, 3);
+
+const supplyConcentration =
+  activeCount > 0
+    ? Math.round(
+        (topCantons.reduce((sum, [, count]) => sum + count, 0) / activeCount) *
+          100,
+      )
+    : 0;
+
+const modelScarcity = modelSegmentation
+  .map((model) => ({
+    ...model,
+    scarcity: Math.round(
+      (1 - model.count / Math.max(...modelSegmentation.map((m) => m.count))) *
+        100,
+    ),
+  }))
+  .sort((a, b) => b.scarcity - a.scarcity);
+
+const inventoryAgeBuckets = [
+  { label: "0–7 days", min: 0, max: 7 },
+  { label: "8–30 days", min: 8, max: 30 },
+  { label: "31–90 days", min: 31, max: 90 },
+  { label: "90+ days", min: 91, max: Infinity },
+].map((bucket) => ({
+  label: bucket.label,
+  count: ageDays.filter((age) => age >= bucket.min && age <= bucket.max).length,
+}));
+
+const searchDifficulty = Math.round(
+  (1 - activeCount / 200) * 50 +
+    (1 - locationCounts.size / 26) * 25 +
+    (mileageMedian / 250000) * 25,
+);
+
+const locationAvailability = Array.from(locationCounts.entries())
+  .sort(([, a], [, b]) => b - a)
+  .slice(0, 8);
+
+const highestYearMedian =
+  yearStats.reduce((max, stat) => Math.max(max, stat.median), 0) || 1;
+const highestTypeCount = typeAvailability[0]?.[1] ?? 1;
+const highestLocationCount = locationAvailability[0]?.[1] ?? 1;
+const highestMileageCount = Math.max(
+  ...mileageBuckets.map((bucket) => bucket.count),
+  1,
+);
+
+const priceMileagePoints = listings
+  .filter(
+    (listing) =>
+      listing.priceChf &&
+      listing.priceChf > 0 &&
+      listing.mileageKm &&
+      listing.mileageKm > 0,
+  )
+  .map((listing) => ({
+    x: listing.mileageKm!,
+    y: listing.priceChf!,
+  }));
+---
+
+<Layout>
+  <Navigation />
+  <main class="dashboard">
+    <header>
+      <div>
+        <p class="eyebrow">Defender Market Intelligence</p>
+        <h1>Swiss Defender Market Dashboard</h1>
+        <p class="intro">
+          Analysis based on {activeCount} active Comparis Defender listings in Switzerland.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <article>
+          <span>Active listings</span>
+          <strong>{activeCount}</strong>
+        </article>
+        <article>
+          <span>Median asking price</span>
+          <strong>CHF {medianAskingPrice.toLocaleString("de-CH")}</strong>
+        </article>
+        <article>
+          <span>Average days on market</span>
+          <strong>{averageDaysOnMarket}</strong>
+        </article>
+        <article>
+          <span>New listings / week</span>
+          <strong
+            >{recentWeeks.reduce((sum, week) => sum + week.count, 0)}</strong
+          >
+        </article>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>Market value</h2>
+      <div class="card-grid">
+        <article class="card full-width">
+          <h3>Price distribution by build year</h3>
+          <div class="chart-container">
+            <canvas id="yearBoxplot"></canvas>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Median asking price</h3>
+          <p>Current market value for Defender listings in Switzerland.</p>
+          <div class="metric">
+            CHF {medianAskingPrice.toLocaleString("de-CH")}
+          </div>
+          <dl>
+            <div>
+              <dt>25th percentile</dt><dd>
+                CHF {q1Price.toLocaleString("de-CH")}
+              </dd>
+            </div>
+            <div>
+              <dt>75th percentile</dt><dd>
+                CHF {q3Price.toLocaleString("de-CH")}
+              </dd>
+            </div>
+            <div>
+              <dt>IQR</dt><dd>CHF {priceIqr.toLocaleString("de-CH")}</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="card">
+          <h3>Price per mileage</h3>
+          <p>
+            Price per 1,000 km helps compare cars of different odometer
+            readings.
+          </p>
+          <div class="metric">
+            CHF {Math.round(averagePricePerThousandKm).toLocaleString("de-CH")} /
+            1,000 km
+          </div>
+          <div class="subtext">
+            Median: CHF {
+              Math.round(medianPricePerThousandKm).toLocaleString("de-CH")
+            }
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Price distribution</h3>
+          <p>
+            25–75% range identifies the normal market band for Defender prices.
+          </p>
+          <div class="distribution">
+            <span>CHF {q1Price.toLocaleString("de-CH")}</span>
+            <div class="range-bar">
+              <div
+                class="range-fill"
+                style={{
+                  left: `${(q1Price / q3Price) * 100}%`,
+                  width: `${((q3Price - q1Price) / q3Price) * 100}%`,
+                }}
+              >
+              </div>
+            </div>
+            <span>CHF {q3Price.toLocaleString("de-CH")}</span>
+          </div>
+          <p class="subtext">
+            Median CHF {medianAskingPrice.toLocaleString("de-CH")}
+          </p>
+        </article>
+
+        <article class="card full-width">
+          <h3>Price vs mileage</h3>
+          <PriceMileageScatter points={priceMileagePoints} />
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Supply</h2>
+        <p>Market depth, liquidity and availability across Swiss regions.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Active listings</h3>
+          <p>Total Defender listings currently visible in the snapshot.</p>
+          <div class="metric">{activeCount}</div>
+        </article>
+
+        <article class="card">
+          <h3>Average days on market</h3>
+          <p>Approximate time since first seen on Comparis.</p>
+          <div class="metric">{averageDaysOnMarket} days</div>
+        </article>
+
+        <article class="card">
+          <h3>New listings per week</h3>
+          <div class="mini-chart">
+            {
+              recentWeeks.map((week) => (
+                <div class="bar-row">
+                  <span>{week.week}</span>
+                  <div class="bar-shell">
+                    <div
+                      class="bar"
+                      style={{
+                        width: `${(week.count / Math.max(...recentWeeks.map((w) => w.count))) * 100}%`,
+                      }}
+                    />
+                  </div>
+                  <strong>{week.count}</strong>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Availability snapshot</h2>
+      <div class="table-grid">
+        <article class="card wide">
+          <h3>Model segmentation matrix</h3>
+          <div class="segmentation-table">
+            <div class="segmentation-row heading">
+              <span>Model</span>
+              <span>Count</span>
+              <span>Median Price</span>
+              <span>Median KM</span>
+            </div>
+            {
+              modelSegmentation.map((model) => (
+                <div class="segmentation-row">
+                  <span>{model.model}</span>
+                  <strong>{model.count}</strong>
+                  <strong>
+                    {model.medianPrice !== null
+                      ? `CHF ${Math.round(model.medianPrice).toLocaleString("de-CH")}`
+                      : "—"}
+                  </strong>
+                  <strong>
+                    {model.medianMileage !== null
+                      ? `${Math.round(model.medianMileage).toLocaleString("de-CH")} km`
+                      : "—"}
+                  </strong>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="card wide">
+          <h3>Listings by canton</h3>
+          <ul>
+            {
+              locationAvailability.map(([canton, count]) => (
+                <li>
+                  <span>{canton}</span>
+                  <strong>{count}</strong>
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Mileage profile</h2>
+        <p>How Defender availability is distributed by odometer reading.</p>
+        <section class="section">
+  <div class="section-header">
+    <h2>Availability intelligence</h2>
+    <p>
+      Regional supply concentration, model scarcity and inventory accessibility.
+    </p>
+  </div>
+
+  <div class="card-grid">
+
+    <article class="card">
+      <h3>Supply concentration</h3>
+
+      <div class="metric">
+        {supplyConcentration}%
+      </div>
+
+      <p>
+        Share of listings located in the three largest Defender markets.
+      </p>
+
+      <ul>
+        {
+          topCantons.map(([canton, count]) => (
+            <li>
+              <span>{canton}</span>
+              <strong>{count}</strong>
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+
+
+    <article class="card">
+      <h3>Search difficulty</h3>
+
+      <div class="metric">
+        {searchDifficulty}/100
+      </div>
+
+      <p>
+        Higher scores indicate fewer choices and harder sourcing.
+      </p>
+
+      <div class="range-bar">
+        <div
+          class="range-fill"
+          style={{ width: `${searchDifficulty}%` }}
+        />
+      </div>
+    </article>
+
+
+    <article class="card">
+      <h3>Inventory freshness</h3>
+
+      <div class="mini-chart">
+        {
+          inventoryAgeBuckets.map((bucket) => (
+            <div class="bar-row">
+              <span>{bucket.label}</span>
+
+              <div class="bar-shell">
+                <div
+                  class="bar"
+                  style={{
+                    width: `${
+                      (bucket.count /
+                        Math.max(
+                          ...inventoryAgeBuckets.map(
+                            (b) => b.count,
+                          ),
+                          1,
+                        )) *
+                      100
+                    }%`,
+                  }}
+                />
+              </div>
+
+              <strong>{bucket.count}</strong>
+            </div>
+          ))
+        }
+      </div>
+    </article>
+
+
+    <article class="card wide">
+      <h3>Model scarcity ranking</h3>
+
+      <div class="segmentation-table">
+        {
+          modelScarcity.map((model) => (
+            <div class="segmentation-row">
+              <span>{model.model}</span>
+              <strong>{model.count}</strong>
+              <strong>
+                {model.scarcity}% scarcity
+              </strong>
+
+              <div class="bar-shell">
+                <div
+                  class="bar"
+                  style={{
+                    width: `${model.scarcity}%`,
+                  }}
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </article>
+
+
+    <article class="card wide">
+      <h3>Canton × model availability</h3>
+
+      <div class="segmentation-table">
+
+        {
+          cantonModelMatrix.map((row) => (
+            <div class="segmentation-row">
+              <strong>{row.canton}</strong>
+
+              {
+                models.slice(0,4).map((model) => (
+                  <span>
+                    {model.split(" ").slice(0,2).join(" ")}:
+                    {row[model]}
+                  </span>
+                ))
+              }
+
+              <strong>
+                Total {row.total}
+              </strong>
+
+            </div>
+          ))
+        }
+
+      </div>
+    </article>
+
+  </div>
+</section>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Median mileage</h3>
+          <div class="metric">
+            {Math.round(mileageMedian).toLocaleString("de-CH")} km
+          </div>
+          <p class="subtext">
+            Q1: {Math.round(mileageQ1).toLocaleString("de-CH")} km · Q3: {
+              Math.round(mileageQ3).toLocaleString("de-CH")
+            } km
+          </p>
+          <p class="subtext">
+            IQR: {Math.round(mileageIqr).toLocaleString("de-CH")} km
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Mileage buckets</h3>
+          <div class="mini-chart">
+            {
+              mileageBuckets.map((bucket) => (
+                <div class="bar-row">
+                  <span>{bucket.label}</span>
+                  <div class="bar-shell">
+                    <div
+                      class="bar"
+                      style={{
+                        width: `${(bucket.count / Math.max(...mileageBuckets.map((b) => b.count))) * 100}%`,
+                      }}
+                    />
+                  </div>
+                  <span class="bucket-price">
+                    {bucket.medianPrice !== null
+                      ? `CHF ${Math.round(bucket.medianPrice).toLocaleString("de-CH")}`
+                      : "—"}
+                  </span>
+                  <strong>{bucket.count}</strong>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Mileage distribution</h3>
+          <div class="distribution">
+            <span>{Math.round(mileageQ1).toLocaleString("de-CH")} km</span>
+            <div class="range-bar">
+              <div
+                class="range-fill"
+                style={{
+                  left: `${(mileageQ1 / Math.max(...mileages, 1)) * 100}%`,
+                  width: `${((mileageQ3 - mileageQ1) / Math.max(...mileages, 1)) * 100}%`,
+                }}
+              >
+              </div>
+            </div>
+            <span>{Math.round(mileageQ3).toLocaleString("de-CH")} km</span>
+          </div>
+          <p class="subtext">
+            Median: {Math.round(mileageMedian).toLocaleString("de-CH")} km
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+
+  .range-bar {
+  margin-top: 1rem;
+}
+
+.card ul {
+  list-style:none;
+  padding:0;
+  margin-top:1rem;
+  display:grid;
+  gap:.5rem;
+}
+
+.card ul li {
+  display:flex;
+  justify-content:space-between;
+  background:#f9f9fb;
+  padding:.7rem 1rem;
+  border-radius:12px;
+}
+
+.segmentation-row span {
+  color:#555;
+}
+
+  .dashboard {
+    padding: 3rem clamp(1rem, 4vw, 4rem);
+    color: #111;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .dashboard header {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    line-height: 1.05;
+  }
+
+  .intro {
+    max-width: 720px;
+    color: #444;
+    margin-top: 0.75rem;
+  }
+
+  .stats-grid,
+  .card-grid,
+  .table-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .table-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    margin-top: 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .card,
+  .card.wide {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  }
+
+  .card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .card.wide {
+    min-height: 320px;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 140px 90px;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .bucket-price {
+    color: #555;
+    font-size: 0.95rem;
+    text-align: right;
+  }
+
+  .metric span {
+    color: #555;
+  }
+
+  .metric {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 1rem 0 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .subtext,
+  .card p,
+  .card dl {
+    color: #555;
+  }
+
+  dl {
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .mini-chart {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .year-chart {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .year-chart-header {
+    display: grid;
+    grid-template-columns: 72px 1fr 100px;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .year-chart-row {
+    display: grid;
+    grid-template-columns: 72px 1fr 100px;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.75rem 0;
+  }
+
+  .year-chart-summary {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .year-chart-summary div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #333;
+  }
+
+  .year-chart-summary span {
+    color: #555;
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    margin-top: 1rem;
+  }
+
+  .chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 90px;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .bar-shell {
+    background: #f2f2f2;
+    border-radius: 999px;
+    height: 14px;
+    overflow: hidden;
+  }
+
+  .bar {
+    height: 100%;
+    background: linear-gradient(90deg, #111827, #4f46e5);
+    border-radius: 999px;
+  }
+
+  .distribution {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .range-bar {
+    position: relative;
+    background: #f2f2f2;
+    border-radius: 999px;
+    height: 18px;
+    overflow: hidden;
+  }
+
+  .range-fill {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: rgba(79, 70, 229, 0.8);
+    border-radius: 999px;
+  }
+
+  .table-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .table-grid li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    background: #f9f9fb;
+    border-radius: 14px;
+  }
+
+  .segmentation-table {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .segmentation-row {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr 1fr 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.8rem 0.9rem;
+    background: #f9f9fb;
+    border-radius: 14px;
+    font-size: 0.95rem;
+  }
+
+  .segmentation-row.heading {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #666;
+    background: transparent;
+    padding: 0 0.2rem;
+  }
+
+  .card strong {
+    color: #111;
+  }
+
+  .chart-tooltip-title {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .chart-tooltip-label {
+    margin: 0.1rem 0;
+  }
+
+  @media (min-width: 900px) {
+    .table-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .chart-tooltip-title {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .chart-tooltip-label {
+    margin: 0.1rem 0;
+  }
+</style>
+
+<YearPriceBoxplot
+  labels={boxplotLabels}
+  dataPoints={boxplotData}
+  insufficient={insufficientYearPoints}
+  highestBoxValue={highestBoxValue}
+/>

@@ -1,0 +1,66 @@
+---
+interface Props {
+    labels: string[];
+    dataPoints: unknown[];
+    insufficient: unknown[];
+    highestBoxValue: number;
+}
+
+const { labels, dataPoints, insufficient, highestBoxValue } = Astro.props;
+---
+
+<div class="chart-container">
+    <canvas id="yearBoxplot"></canvas>
+</div>
+
+<script id="yearBoxplot-data" type="application/json" set:html={JSON.stringify({
+    labels,
+    dataPoints,
+    insufficient,
+    highestBoxValue,
+})} />
+
+<script>
+    import { Chart, registerables } from "chart.js";
+    import {
+        BoxPlotController,
+        BoxAndWiskers,
+    } from "@sgratzl/chartjs-chart-boxplot";
+
+    Chart.register(...registerables);
+    Chart.register(BoxPlotController, BoxAndWiskers);
+
+    const dataElement = document.getElementById("yearBoxplot-data");
+
+    if (!dataElement) {
+        throw new Error("Missing yearBoxplot data");
+    }
+
+    const data = JSON.parse(dataElement.textContent ?? "{}");
+
+    const canvas = document.getElementById("yearBoxplot");
+
+    if (canvas instanceof HTMLCanvasElement) {
+        new Chart(canvas, {
+            type: "boxplot",
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: "Price Distribution",
+                        data: data.dataPoints,
+                    },
+                    {
+                        label: "Insufficient data",
+                        type: "scatter",
+                        data: data.insufficient,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            },
+        });
+    }
+</script>

@@ -1,0 +1,97 @@
+---
+interface Props {
+  points: Array<{ x: number; y: number }>;
+}
+
+const { points } = Astro.props;
+---
+
+<div class="chart-container">
+  <canvas id="priceMileageScatter"></canvas>
+</div>
+
+<script id="price-mileage-data" type="application/json" set:html={JSON.stringify({ points })} />
+
+<script>
+  import { Chart, registerables } from "chart.js";
+
+  Chart.register(...registerables);
+
+  const dataElement = document.getElementById("price-mileage-data");
+  if (!dataElement) {
+    throw new Error("Missing price mileage data");
+  }
+
+  const data = JSON.parse(dataElement.textContent ?? "{}");
+  const canvas = document.getElementById("priceMileageScatter");
+
+  if (canvas instanceof HTMLCanvasElement) {
+    const priceFormat = new Intl.NumberFormat("de-CH", {
+      style: "currency",
+      currency: "CHF",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+
+    const points = data.points ?? [];
+    const maxPrice = Math.max(...points.map((point) => point.y), 1);
+    const maxMileage = Math.max(...points.map((point) => point.x), 1);
+
+    new Chart(canvas, {
+      type: "scatter",
+      data: {
+        datasets: [
+          {
+            label: "Listings",
+            data: points,
+            backgroundColor: "rgba(59, 130, 246, 0.8)",
+            borderColor: "rgba(59, 130, 246, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                const point = context.raw;
+                return `${priceFormat.format(point.y)} · ${point.x.toLocaleString("de-CH")} km`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Mileage (km)",
+              color: "#111",
+            },
+            ticks: {
+              callback: (value) => `${Number(value).toLocaleString("de-CH")} km`,
+            },
+            suggestedMax: Math.ceil(maxMileage * 1.05),
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Price (CHF)",
+              color: "#111",
+            },
+            ticks: {
+              callback: (value) => priceFormat.format(Number(value)),
+            },
+            suggestedMax: Math.ceil(maxPrice * 1.1),
+          },
+        },
+      },
+    });
+  }
+</script>
