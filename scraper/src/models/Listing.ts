@@ -1,0 +1,31 @@
+export interface Listing {
+  title: string;
+  url: string;
+  priceChf?: number;
+  mileageKm?: number;
+  year?: number;
+  fuelType?: string;
+  transmission?: string;
+  location?: string;
+  horsepower?: number;
+  source: string;
+  scrapedAt: string;
+  partnerName?: string;
+  make?: string;
+  model?: string;
+  type?: string;
+  vehicleType?: string;
+  bodyType?: string | null;
+  marketPrice?: number;
+  currency?: string;
+  comparisRating?: number;
+  imageUrl?: string;
+  desktopImageUrl?: string;
+  mobileImageUrl?: string;
+  priceDevelopmentDirection?: number;
+  advertiserName?: string;
+  advertiserStreet?: string | null;
+  advertiserZipAndCity?: string;
+  advertiserPhone?: string;
+  createDate?: string;
+}
