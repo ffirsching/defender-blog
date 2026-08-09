@@ -271,14 +271,21 @@ export function extractComparisListings(html: string): Listing[] {
 }
 
 export class ComparisScraper extends BaseScraper {
+  constructor(
+    private readonly targetUrl: string,
+    private readonly modelName: string,
+  ) {
+    super();
+  }
+
   async run(): Promise<Listing[]> {
     await this.init();
     try {
-      const baseUrl = 'https://www.comparis.ch/carfinder/marktplatz?requestobject=%7B%22Make%22%3Anull%2C%22VehicleType%22%3A%222%2C3%2C4%2C6%22%2C%22Construction%22%3A%22%22%2C%22FirstMatriculationYearFrom%22%3A2007%2C%22FirstMatriculationYearTo%22%3A2015%2C%22PriceFrom%22%3Anull%2C%22PriceTo%22%3Anull%2C%22MileageFrom%22%3Anull%2C%22MileageTo%22%3Anull%2C%22MaxAdAge%22%3Anull%2C%22MinComparisPoints%22%3Anull%2C%22OutsideColor%22%3A%22%22%2C%22Transmission%22%3Anull%2C%22DriveTrain%22%3A%22%22%2C%22Co2Emission%22%3Anull%2C%22Eurocode%22%3Anull%2C%22FuelType%22%3A%22%22%2C%22PerformanceFrom%22%3Anull%2C%22PerformanceTo%22%3Anull%2C%22ConsumptionFrom%22%3Anull%2C%22ConsumptionTo%22%3Anull%2C%22SeatsFrom%22%3Anull%2C%22SeatsTo%22%3Anull%2C%22DoorsFrom%22%3Anull%2C%22DoorsTo%22%3Anull%2C%22Cantons%22%3A%22%22%2C%22ComfortOptions%22%3A%22%22%2C%22SecurityOptions%22%3A%22%22%2C%22Features%22%3A%22%22%2C%22FreeTextSearch%22%3A%22%22%2C%22CapacityFrom%22%3Anull%2C%22CapacityTo%22%3Anull%2C%22Garage%22%3Anull%2C%22Site%22%3Anull%2C%22EfficiencyCategory%22%3Anull%2C%22Sort%22%3A1%2C%22TypeTag%22%3Anull%2C%22MFK%22%3Anull%2C%22ImageRequired%22%3Anull%2C%22MakeAggregationLabelID%22%3A208431%2C%22ModelGroupAggregationLabelID%22%3A208432%2C%22ModelAggregationLabelID%22%3Anull%2C%22LeasingAvailable%22%3Anull%7D';
+      const baseUrl = this.targetUrl;
       if (!this.page) throw new Error('Playwright page was not initialized.');
 
       const firstPageResponse = await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: env.timeoutMs });
-      console.log(`[scraper] comparis status=${firstPageResponse?.status() ?? 'unknown'} url=${firstPageResponse?.url().substring(0,50) ?? this.page.url()}`);
+      console.log(`[scraper] comparis status=${firstPageResponse?.status() ?? 'unknown'} url=${firstPageResponse?.url().substring(0, 50) ?? this.page.url()}`);
       console.log(`[scraper] comparis content-type=${firstPageResponse?.headers()['content-type'] ?? 'unknown'}`);
 
       try {
@@ -306,7 +313,7 @@ export class ComparisScraper extends BaseScraper {
 
         if (page > 1) {
           const response = await this.page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: env.timeoutMs });
-          console.log(`[scraper] comparis status=${response?.status() ?? 'unknown'} url=${response?.url().substring(0,50) ?? this.page.url()}`);
+          console.log(`[scraper] comparis status=${response?.status() ?? 'unknown'} url=${response?.url().substring(0, 50) ?? this.page.url()}`);
           await this.waitForPageLoad();
           await this.delay();
         }

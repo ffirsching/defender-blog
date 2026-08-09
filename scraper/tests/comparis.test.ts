@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { buildComparisOutputFilename } from '../src/config/comparisTargets.js';
 import { extractComparisListings } from '../src/scrapers/comparis.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -31,4 +32,10 @@ test('detects max Comparis pagination page from the snapshot', () => {
   const maxPage = extractComparisMaxPage(html);
 
   assert.equal(maxPage, 14, 'expected the pagination to contain 14 pages');
+});
+
+test('derives a dataset-specific output filename from the configured key', () => {
+  const outputFile = buildComparisOutputFilename({ key: 'defender-2007-2015', label: 'Defender 2007-2015', url: 'https://example.com' });
+
+  assert.equal(outputFile, 'comparis-defender-2007-2015.json');
 });

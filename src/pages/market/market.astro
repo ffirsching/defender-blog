@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Navigation from "../../components/Navigation.astro";
-import data from "../../../scraper/data/comparis-listings.json" with { type: "json" };
 import YearPriceBoxplot from "./yearPriceBoxplot.astro";
 import PriceMileageScatter from "./priceMileageScatter.astro";
+import comparisConfig from "../../../scraper/src/config/comparis-config.yaml";
 
 type Listing = {
   title: string;
@@ -18,10 +18,70 @@ type Listing = {
   createDate?: string;
 };
 
-const listings = (data as Listing[]).filter(
+type ComparisConfig = {
+  models: {
+    name: string;
+    url: string;
+  }[];
+};
+
+const { models } = comparisConfig as ComparisConfig;
+
+function slugify(name: string) {
+  return 'comparis-'.concat(
+    name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, ""));
+}
+
+const datasetModules = import.meta.glob("../../../scraper/data/*.json", {
+  eager: true,
+  import: "default",
+}) as Record<string, unknown>;
+
+const datasetsByKey = Object.fromEntries(
+  Object.entries(datasetModules).map(([modulePath, moduleData]) => {
+    const fileName = modulePath.split("/").pop()!;
+    const key = fileName.replace(/^comparis-/, "").replace(/\.json$/, "");
+
+    return [
+      key,
+      Array.isArray(moduleData) ? (moduleData as Listing[]) : [],
+    ];
+  }),
+);
+
+const availableDatasets = models
+  .map((model) => {
+    const key = slugify(model.name);
+
+    return {
+      key,
+      label: model.name,
+      url: model.url,
+      fileName: `comparis-${key}.json`,
+      data: datasetsByKey[key] ?? [],
+    };
+  })
+  .sort((a, b) => a.label.localeCompare(b.label));
+
+const selectedDatasetKey =
+  Astro.url.searchParams.get("dataset") ??
+  availableDatasets[0]?.key ??
+  "";
+
+const activeDataset =
+  availableDatasets.find((d) => d.key === selectedDatasetKey) ??
+  availableDatasets[0];
+
+const listings = activeDataset.data.filter(
   (listing) => listing.priceChf && listing.priceChf > 0,
 );
+
 const activeCount = listings.length;
+const activeDatasetLabel = activeDataset?.label ?? "Comparis";
 
 function percentile(values: number[], fraction: number) {
   if (!values.length) return 0;
@@ -277,7 +337,6 @@ const modelSegmentation = Array.from(typeCounts.entries())
       medianMileage: mileages.length ? percentile(mileages, 0.5) : null,
     };
   });
-const models = Array.from(typeCounts.keys());
 
 const cantonModelMatrix = Array.from(locationCounts.keys()).map((canton) => {
   const row: Record<string, number | string> = { canton };
@@ -368,9 +427,24 @@ const priceMileagePoints = listings
         <p class="eyebrow">Defender Market Intelligence</p>
         <h1>Swiss Defender Market Dashboard</h1>
         <p class="intro">
-          Analysis based on {activeCount} active Comparis Defender listings in Switzerland.
+          Analysis based on {activeCount} active {activeDatasetLabel} Defender listings in Switzerland.
         </p>
       </div>
+      <div class="dataset-toolbar">
+        <label for="dataset-select">Dataset</label>
+        <form method="get" class="dataset-form">
+          <select id="dataset-select" name="dataset" onchange="this.form.submit()">
+            {
+              availableDatasets.map((dataset) => (
+                <option value={dataset.key} selected={dataset.key === activeDataset?.key}>
+                  {dataset.label}
+                </option>
+              ))
+            }
+          </select>
+        </form>
+      </div>
+
       <div class="stats-grid">
         <article>
           <span>Active listings</span>
@@ -848,11 +922,28 @@ const priceMileagePoints = listings
     margin-top: 0.75rem;
   }
 
+  .dataset-toolbar,
   .stats-grid,
   .card-grid,
   .table-grid {
     display: grid;
     gap: 1.25rem;
+  }
+
+  .dataset-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .dataset-form select {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    padding: 0.7rem 1rem;
+    font: inherit;
+    background: #fff;
   }
 
   .stats-grid {

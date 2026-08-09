@@ -9,8 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@rollup/plugin-yaml": "^5.0.0",
+    "@sgratzl/chartjs-chart-boxplot": "^4.4.5",
     "astro": "^7.1.6",
-    "chart.js": "^4.5.1",
-    "@sgratzl/chartjs-chart-boxplot": "^4.4.5"
+    "chart.js": "^4.5.1"
   }
 }

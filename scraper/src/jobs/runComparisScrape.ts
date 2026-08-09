@@ -1,22 +1,48 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { env } from '../config/env.js';
-import { ComparisScraper } from '../scrapers/comparis.js';
+import { ComparisScraper } from "../scrapers/comparis.ts";
+import { loadConfig } from "../services/config.ts";
+import type { Listing } from '../models/Listing.ts';
+import fs from "fs/promises";
+import path from "path";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputDir = path.resolve(__dirname, '..', '..', env.outputDir);
-mkdirSync(outputDir, { recursive: true });
+const config = loadConfig();
 
-async function main() {
-  const scraper = new ComparisScraper();
-  const listings = await scraper.run();
-  const outputPath = path.join(outputDir, 'comparis-listings.json');
-  writeFileSync(outputPath, JSON.stringify(listings, null, 2));
-  console.log(`Scraped ${listings.length} listings and saved them to ${outputPath}`);
+for (const model of config.models) {
+
+    console.log(`Scraping ${model.name}`);
+
+    const scraper = new ComparisScraper(
+        model.url,
+        model.name,
+    );
+
+    const listings = await scraper.run();
+
+    await saveListings(model.name, listings);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+async function saveListings(name: string, listings: Listing[]) {
+
+    const filename = `${slugify(name)}.json`;
+
+    await fs.mkdir(
+        path.join(process.cwd(), "scraper/data"),
+        { recursive: true }
+    );
+
+    await fs.writeFile(
+        path.join(process.cwd(), "../public/data", filename),
+        JSON.stringify(listings, null, 2),
+        "utf8"
+    );
+
+    console.log(`Saved ${listings.length} listings -> ${filename}`);
+}
+
+function slugify(name: string) {
+  return 'comparis-'.concat(
+    name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, ""));
+}
