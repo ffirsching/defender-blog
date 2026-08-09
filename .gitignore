@@ -77,3 +77,5 @@ public/
 # astro files
 .astro/
 /.astro
+.astro/data-store.json
+.astro/settings.json
