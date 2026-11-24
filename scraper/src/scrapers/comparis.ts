@@ -110,6 +110,149 @@ function extractComparisItemUrlMap(html: string) {
   return urlMap;
 }
 
+export function extractComparisListingUrls(html: string): string[] {
+  const $ = cheerio.load(html);
+  const urls = new Set<string>();
+
+  $('a[href]').each((_, element) => {
+    const href = $(element).attr('href');
+    if (!href) return;
+
+    const normalizedUrl = href.startsWith('http')
+      ? href
+      : `https://www.comparis.ch${href.startsWith('/') ? '' : '/'}${href}`;
+
+    if (normalizedUrl.startsWith('https://www.comparis.ch/carfinder/marktplatz/details/show/')) {
+      urls.add(normalizedUrl);
+    }
+  });
+
+  return Array.from(urls);
+}
+
+export function extractComparisAdData(html: string): Record<string, unknown> | undefined {
+  const $ = cheerio.load(html);
+  const script = $('script#__NEXT_DATA__[type="application/json"]').html();
+  if (!script) return undefined;
+
+  try {
+    const payload = JSON.parse(script) as Record<string, unknown>;
+    const props = payload.props as Record<string, unknown> | undefined;
+    const pageProps = props?.pageProps as Record<string, unknown> | undefined;
+    const adData = pageProps?.adData;
+    return adData && typeof adData === 'object'
+      ? adData as Record<string, unknown>
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function listingFromComparisAdData(adData: Record<string, unknown>, fallbackUrl?: string): Listing | undefined {
+  const mainInformation = adData.MainInformation && typeof adData.MainInformation === 'object'
+    ? adData.MainInformation as Record<string, unknown>
+    : {};
+  const overview = adData.Overview && typeof adData.Overview === 'object'
+    ? adData.Overview as Record<string, unknown>
+    : {};
+  const technicalDetails = adData.TechnicalDetails && typeof adData.TechnicalDetails === 'object'
+    ? adData.TechnicalDetails as Record<string, unknown>
+    : {};
+  const priceInformation = adData.PriceInformation && typeof adData.PriceInformation === 'object'
+    ? adData.PriceInformation as Record<string, unknown>
+    : {};
+  const partnerInformation = adData.PartnerInformation && typeof adData.PartnerInformation === 'object'
+    ? adData.PartnerInformation as Record<string, unknown>
+    : {};
+  const contactInformation = adData.ContactInformation && typeof adData.ContactInformation === 'object'
+    ? adData.ContactInformation as Record<string, unknown>
+    : {};
+  const advertiserInformation = contactInformation.AdvertiserInformation && typeof contactInformation.AdvertiserInformation === 'object'
+    ? contactInformation.AdvertiserInformation as Record<string, unknown>
+    : {};
+
+  const make = normalizeText(typeof mainInformation.MakeLabel === 'string' ? mainInformation.MakeLabel : undefined);
+  const model = normalizeText(typeof mainInformation.ModelGroupLabel === 'string'
+    ? mainInformation.ModelGroupLabel
+    : typeof mainInformation.ModelLabel === 'string'
+      ? mainInformation.ModelLabel
+      : undefined);
+  const type = normalizeText(typeof mainInformation.TypeText === 'string' ? mainInformation.TypeText : undefined);
+  let title = normalizeTitle(typeof adData.OriginalTitle === 'string' ? adData.OriginalTitle : undefined);
+  if (!title) {
+    title = type && make && !type.toLowerCase().startsWith(make.toLowerCase())
+      ? `${make} ${type}`
+      : type ?? (make && model ? `${make} ${model}` : undefined);
+  }
+
+  const sharingUrl = normalizeText(typeof adData.SharingUrl === 'string' ? adData.SharingUrl : undefined);
+  const url = sharingUrl ?? fallbackUrl;
+  if (!url) return undefined;
+
+  return {
+    title: title ?? 'Untitled listing',
+    url,
+    source: 'comparis',
+    scrapedAt: new Date().toISOString(),
+    priceChf: typeof priceInformation.Price === 'number'
+      ? priceInformation.Price
+      : normalizePrice(typeof priceInformation.PriceText === 'string' ? priceInformation.PriceText : undefined),
+    mileageKm: typeof mainInformation.Mileage === 'number'
+      ? mainInformation.Mileage
+      : normalizeMileage(typeof mainInformation.MileageText === 'string' ? mainInformation.MileageText : undefined),
+    year: normalizeYear(typeof mainInformation.FirstRegistrationDateText === 'string'
+      ? mainInformation.FirstRegistrationDateText
+      : undefined),
+    transmission: normalizeText(typeof overview.Transmission === 'string'
+      ? overview.Transmission
+      : typeof technicalDetails.Transmission === 'string'
+        ? technicalDetails.Transmission
+        : undefined),
+    horsepower: parseHorsepower(typeof overview.EngineInfo === 'string' ? overview.EngineInfo : undefined),
+    fuelType: normalizeText(typeof overview.FuelType === 'string' ? overview.FuelType : undefined),
+    location: normalizeText(typeof advertiserInformation.ZipAndCity === 'string'
+      ? advertiserInformation.ZipAndCity
+      : undefined),
+    partnerName: normalizeText(typeof partnerInformation.Name === 'string'
+      ? partnerInformation.Name
+      : undefined),
+    make,
+    model,
+    type,
+    vehicleType: undefined,
+    bodyType: normalizeText(typeof overview.BodyType === 'string' ? overview.BodyType : undefined) ?? null,
+    marketPrice: typeof priceInformation.MarketPrice === 'number' ? priceInformation.MarketPrice : undefined,
+    currency: typeof priceInformation.FinancingCurrencyText === 'string'
+      ? priceInformation.FinancingCurrencyText
+      : 'CHF',
+    comparisRating: adData.ComparisRatingInformation && typeof adData.ComparisRatingInformation === 'object'
+      && typeof (adData.ComparisRatingInformation as Record<string, unknown>).ComparisRating === 'number'
+      ? (adData.ComparisRatingInformation as Record<string, unknown>).ComparisRating as number
+      : undefined,
+    imageUrl: Array.isArray(adData.ImageUrls) && typeof adData.ImageUrls[0] === 'string'
+      ? adData.ImageUrls[0]
+      : undefined,
+    advertiserName: normalizeText(typeof advertiserInformation.Name === 'string'
+      ? advertiserInformation.Name
+      : undefined),
+    advertiserStreet: typeof advertiserInformation.Street === 'string'
+      ? advertiserInformation.Street
+      : null,
+    advertiserZipAndCity: normalizeText(typeof advertiserInformation.ZipAndCity === 'string'
+      ? advertiserInformation.ZipAndCity
+      : undefined),
+    advertiserPhone: normalizeText(typeof advertiserInformation.Phone === 'string'
+      ? advertiserInformation.Phone
+      : undefined),
+    createDate: typeof mainInformation.CreateDate === 'string'
+      ? mainInformation.CreateDate
+      : typeof adData.CreateDate === 'string'
+        ? adData.CreateDate
+        : undefined,
+    priceHistory: [],
+  };
+}
+
 export function extractComparisListings(html: string): Listing[] {
   const listings: Listing[] = [];
   const resultData = extractComparisInitialResultData(html);
@@ -309,6 +452,7 @@ export class ComparisScraper extends BaseScraper {
       console.log(`[scraper] comparis detected maxPage=${maxPage}`);
 
       const allListings: Listing[] = [];
+      const listingUrls = new Set<string>();
       for (let page = 1; page <= maxPage; page += 1) {
         const pageUrl = buildComparisPageUrl(baseUrl, page);
         console.log(`[scraper] comparis fetching page ${page}/${maxPage}: ${pageUrl}`);
@@ -321,8 +465,33 @@ export class ComparisScraper extends BaseScraper {
         }
 
         const html = page === 1 ? firstPageHtml : await this.page.content();
-        const pageListings = extractComparisListings(html).map((listing) => ({ ...listing, scrapedAt: new Date().toISOString() }));
-        allListings.push(...pageListings);
+        for (const url of extractComparisListingUrls(html)) {
+          listingUrls.add(url);
+        }
+      }
+
+      console.log(`[scraper] comparis found ${listingUrls.size} unique listing URLs`);
+
+      for (const [index, listingUrl] of Array.from(listingUrls).entries()) {
+        console.log(`[scraper] comparis fetching listing ${index + 1}/${listingUrls.size}: ${listingUrl}`);
+        try {
+          const response = await this.page.goto(listingUrl, { waitUntil: 'domcontentloaded', timeout: env.timeoutMs });
+          console.log(`[scraper] comparis listing status=${response?.status() ?? 'unknown'} url=${this.page.url()}`);
+          await this.waitForPageLoad();
+          await this.delay();
+
+          const html = await this.page.content();
+          const adData = extractComparisAdData(html);
+          if (!adData) {
+            console.warn(`[scraper] comparis missing __NEXT_DATA__.adData for ${listingUrl}`);
+            continue;
+          }
+
+          const listing = listingFromComparisAdData(adData, listingUrl);
+          if (listing) allListings.push(listing);
+        } catch (error) {
+          console.warn(`[scraper] comparis failed to scrape listing ${listingUrl}`, error);
+        }
       }
 
       return allListings;

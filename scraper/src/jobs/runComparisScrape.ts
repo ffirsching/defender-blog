@@ -1,6 +1,6 @@
-import { ComparisScraper } from "../scrapers/comparis.ts";
-import { loadConfig } from "../services/config.ts";
-import type { Listing } from '../models/Listing.ts';
+import { ComparisScraper } from "../scrapers/comparis.js";
+import { loadConfig } from "../services/config.js";
+import type { Listing } from '../models/Listing.js';
 import fs from "fs/promises";
 import path from "path";
 
@@ -37,7 +37,7 @@ async function saveListings(name: string, listings: Listing[]) {
         existingListings = JSON.parse(existingData);
     } catch (err) {
         // File doesn't exist, start fresh
-        if (err.code !== 'ENOENT') throw err;
+        if (!(err instanceof Error) || !('code' in err) || err.code !== 'ENOENT') throw err;
     }
 
     // Build URL -> listing index maps for both existing and new listings

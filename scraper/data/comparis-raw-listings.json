@@ -1,0 +1,792 @@
+[
+  {
+    "AdID": 33823016,
+    "FirstSeenOn": "18.11.2026",
+    "CreateDate": "2026-11-18T10:08:48.737",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_126.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0 Fieldmaster Edition",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 59'900",
+    "Price": 59900,
+    "MarketPrice": 74600,
+    "Currency": "CHF",
+    "ComparisRating": 5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "07.2025",
+      "Mileage": "3.900 km",
+      "FuelType": "Benzin",
+      "Location": "5702 (AG)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "286 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/36f2057b-d57d-cae0-3c18-e4a75ffa577b.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/36f2057b-d57d-cae0-3c18-e4a75ffa577b.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/36f2057b-d57d-cae0-3c18-e4a75ffa577b.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33823016,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Niederlenz. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Niederlenz. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Niederlenz. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "I.B.A. Automobile AG",
+        "Street": null,
+        "ZipAndCity": "5702 Niederlenz",
+        "Phone": "+41628929454"
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33823016",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33823016",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      },
+      {
+        "Title": "Autolina",
+        "Href": "/carfinder/redirect/tooriginalad?id=33830783",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "e644ce63-5a6c-4fab-9e94-e957e042b324",
+        "CustomParameters": {
+          "Adid": "33830783",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_126.png",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 102231570
+  },
+  {
+    "AdID": 33461632,
+    "FirstSeenOn": "18.08.2026",
+    "CreateDate": "2026-08-18T17:12:14.507",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_126.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0 Fieldmaster Edition",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 59'900",
+    "Price": 59900,
+    "MarketPrice": 69800,
+    "Currency": "CHF",
+    "ComparisRating": 5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "05.2025",
+      "Mileage": "15.400 km",
+      "FuelType": "Benzin",
+      "Location": "5604 (AG)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "286 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/8c70b205-20c6-2e94-0228-912dc5c2c975.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/8c70b205-20c6-2e94-0228-912dc5c2c975.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/8c70b205-20c6-2e94-0228-912dc5c2c975.jpg",
+    "ShowPriceDevelopment": true,
+    "PriceDevelopmentDirection": 2,
+    "ContactInformation": {
+      "ContactAdId": 33461632,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Hendschiken. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Hendschiken. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Hendschiken. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Garage Rotondo AG",
+        "Street": null,
+        "ZipAndCity": "5604 Hendschiken",
+        "Phone": "+41628863636"
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33461632",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33461632",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      },
+      {
+        "Title": "Autolina",
+        "Href": "/carfinder/redirect/tooriginalad?id=33616377",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "e644ce63-5a6c-4fab-9e94-e957e042b324",
+        "CustomParameters": {
+          "Adid": "33616377",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_126.png",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 102231570
+  },
+  {
+    "AdID": 33256521,
+    "FirstSeenOn": "19.06.2026",
+    "CreateDate": "2026-06-19T19:18:49.317",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_126.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0 Fieldmaster Edition",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 62'800",
+    "Price": 62800,
+    "MarketPrice": 69500,
+    "Currency": "CHF",
+    "ComparisRating": 5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "12.2023",
+      "Mileage": "5.699 km",
+      "FuelType": "Benzin",
+      "Location": "8730 (SG)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "286 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/624c99fd-269b-da7b-8bb9-af4c38fff45c.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/624c99fd-269b-da7b-8bb9-af4c38fff45c.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/624c99fd-269b-da7b-8bb9-af4c38fff45c.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33262530,
+      "HasContactForm": true,
+      "ContactSiteId": 126,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Uznach. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Uznach. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Uznach. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "AUTOPARK UZNACH AG",
+        "Street": "Buchbergstrasse 2",
+        "ZipAndCity": "8730 Uznach",
+        "Phone": null
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "Autolina",
+        "Href": "/carfinder/redirect/tooriginalad?id=33262530",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "e644ce63-5a6c-4fab-9e94-e957e042b324",
+        "CustomParameters": {
+          "Adid": "33262530",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_126.png",
+        "IsClickable": true
+      },
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33256521",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33256521",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 102231570
+  },
+  {
+    "AdID": 33740317,
+    "FirstSeenOn": "28.10.2026",
+    "CreateDate": "2026-10-28T21:07:27.62",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0 Utility Wagon 5-Sitz",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 66'900",
+    "Price": 66900,
+    "MarketPrice": 66400,
+    "Currency": "CHF",
+    "ComparisRating": 4.5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "06.2025",
+      "Mileage": "1.900 km",
+      "FuelType": "Benzin",
+      "Location": "8702 (ZH)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "286 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cb61cb43-0457-c5c9-f67b-02fa6285b5ad.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cb61cb43-0457-c5c9-f67b-02fa6285b5ad.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cb61cb43-0457-c5c9-f67b-02fa6285b5ad.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33740317,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Zollikon. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Zollikon. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Zollikon. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Dr. J. H.",
+        "Street": null,
+        "ZipAndCity": "8702 Zollikon",
+        "Phone": null
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33740317",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33740317",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 201903808
+  },
+  {
+    "AdID": 33715285,
+    "FirstSeenOn": "22.10.2026",
+    "CreateDate": "2026-10-22T09:08:46.963",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_126.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0 Fieldmaster Edition",
+    "VehicleType": "Occasion",
+    "BodyType": null,
+    "BodyTypeId": 17,
+    "ConditionId": 2,
+    "PriceText": "CHF 68'900",
+    "Price": 68900,
+    "MarketPrice": 75200,
+    "Currency": "CHF",
+    "ComparisRating": 4.5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "02.2026",
+      "Mileage": "9.800 km",
+      "FuelType": "Benzin",
+      "Location": "9507 (TG)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "286 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/4db64761-7bf3-9ca9-0e08-58bc5cd692a5.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/4db64761-7bf3-9ca9-0e08-58bc5cd692a5.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/4db64761-7bf3-9ca9-0e08-58bc5cd692a5.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33717206,
+      "HasContactForm": true,
+      "ContactSiteId": 126,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Stettfurt. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Stettfurt. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Stettfurt. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Auto Schaffer AG",
+        "Street": "Hauptstrasse  41",
+        "ZipAndCity": "9507 Stettfurt",
+        "Phone": null
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "Autolina",
+        "Href": "/carfinder/redirect/tooriginalad?id=33717206",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "e644ce63-5a6c-4fab-9e94-e957e042b324",
+        "CustomParameters": {
+          "Adid": "33717206",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_126.png",
+        "IsClickable": true
+      },
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33715285",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33715285",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 102231570
+  },
+  {
+    "AdID": 33623799,
+    "FirstSeenOn": "29.09.2026",
+    "CreateDate": "2026-09-29T15:50:07.893",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_126.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0D Utility Wagon 5-Sitz",
+    "VehicleType": "Occasion",
+    "BodyType": null,
+    "BodyTypeId": 17,
+    "ConditionId": 2,
+    "PriceText": "CHF 64'800",
+    "Price": 64800,
+    "MarketPrice": 69500,
+    "Currency": "CHF",
+    "ComparisRating": 4.5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "05.2026",
+      "Mileage": "3.988 km",
+      "FuelType": "Diesel",
+      "Location": "6012 (LU)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "249 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/f1355215-5c47-ee15-8581-f517e657b038.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/f1355215-5c47-ee15-8581-f517e657b038.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/f1355215-5c47-ee15-8581-f517e657b038.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33623799,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Kriens-Obernau. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Kriens-Obernau. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Kriens-Obernau. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "CM Automobile AG",
+        "Street": null,
+        "ZipAndCity": "6012 Kriens-Obernau",
+        "Phone": "+41415585060"
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33623799",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33623799",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      },
+      {
+        "Title": "Autolina",
+        "Href": "/carfinder/redirect/tooriginalad?id=33617167",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "e644ce63-5a6c-4fab-9e94-e957e042b324",
+        "CustomParameters": {
+          "Adid": "33617167",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_126.png",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 201903810
+  },
+  {
+    "AdID": 33744508,
+    "FirstSeenOn": "29.10.2026",
+    "CreateDate": "2026-10-29T17:07:20.183",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0D Trialmaster Edition",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 68'000",
+    "Price": 68000,
+    "MarketPrice": 63300,
+    "Currency": "CHF",
+    "ComparisRating": 4,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "05.2023",
+      "Mileage": "14.500 km",
+      "FuelType": "Diesel",
+      "Location": "3368 (BE)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "249 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/e5e3e42f-7b90-9ea4-3cbf-b58fb3373b88.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/e5e3e42f-7b90-9ea4-3cbf-b58fb3373b88.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/e5e3e42f-7b90-9ea4-3cbf-b58fb3373b88.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33744508,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Bleienbach. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Bleienbach. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Bleienbach. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Peter",
+        "Street": null,
+        "ZipAndCity": "3368 Bleienbach",
+        "Phone": null
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33744508",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33744508",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 102231571
+  },
+  {
+    "AdID": 32755290,
+    "FirstSeenOn": "06.02.2026",
+    "CreateDate": "2026-02-06T18:07:14.19",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0D Utility Wagon 5-Sitz",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 69'900",
+    "Price": 69900,
+    "MarketPrice": 62600,
+    "Currency": "CHF",
+    "ComparisRating": 4,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "03.2025",
+      "Mileage": "11.000 km",
+      "FuelType": "Diesel",
+      "Location": "8157 (ZH)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "249 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/1250b673-2a18-a25a-73e5-a0a80bb15137.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/1250b673-2a18-a25a-73e5-a0a80bb15137.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/1250b673-2a18-a25a-73e5-a0a80bb15137.jpg",
+    "ShowPriceDevelopment": true,
+    "PriceDevelopmentDirection": 2,
+    "ContactInformation": {
+      "ContactAdId": 32755290,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Hedin Automotive Dielsdorf",
+        "Street": null,
+        "ZipAndCity": "8157 Dielsdorf",
+        "Phone": "+41582697100"
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=32755290",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "32755290",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 201903810
+  },
+  {
+    "AdID": 30796735,
+    "FirstSeenOn": "25.06.2024",
+    "CreateDate": "2024-06-25T12:12:32.983",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0D Utility Wagon 5-Sitz",
+    "VehicleType": "Occasion",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 2,
+    "PriceText": "CHF 59'000",
+    "Price": 59000,
+    "MarketPrice": 54700,
+    "Currency": "CHF",
+    "ComparisRating": 4,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "08.2024",
+      "Mileage": "32.000 km",
+      "FuelType": "Diesel",
+      "Location": "8157 (ZH)",
+      "Condition": "Occasion",
+      "Transmission": "Automat",
+      "Power": "249 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/16850196-25f1-86ec-661e-3639d47f9707.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/16850196-25f1-86ec-661e-3639d47f9707.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/16850196-25f1-86ec-661e-3639d47f9707.jpg",
+    "ShowPriceDevelopment": true,
+    "PriceDevelopmentDirection": 2,
+    "ContactInformation": {
+      "ContactAdId": 30796735,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Hedin Automotive Dielsdorf",
+        "Street": null,
+        "ZipAndCity": "8157 Dielsdorf",
+        "Phone": "+41582697100"
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=30796735",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "30796735",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 201903810
+  },
+  {
+    "AdID": 33789471,
+    "FirstSeenOn": "10.11.2026",
+    "CreateDate": "2026-11-10T08:07:56.18",
+    "Logos": [
+      "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png"
+    ],
+    "PartnerLogoURL": "https://mapl-assets.b-cdn.net/carfinder/images/static/partner_logo_small_100.png",
+    "PartnerName": "AutoScout24",
+    "Make": "Ineos",
+    "Model": "Grenadier",
+    "Type": "Grenadier 3.0D Fieldmaster Edition",
+    "VehicleType": "Vorführwagen",
+    "BodyType": "suv",
+    "BodyTypeId": 6,
+    "ConditionId": 4,
+    "PriceText": "CHF 92'000",
+    "Price": 92000,
+    "MarketPrice": 76600,
+    "Currency": "CHF",
+    "ComparisRating": 3.5,
+    "ShowComparisRating": true,
+    "Specifications": {
+      "MatriculationDate": "04.2026",
+      "Mileage": "8.000 km",
+      "FuelType": "Diesel",
+      "Location": "8157 (ZH)",
+      "Condition": "Vorführwagen",
+      "Transmission": "Automat",
+      "Power": "249 PS"
+    },
+    "ImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/502051c5-050f-1a00-9d29-211026a181ef.jpg",
+    "DesktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/502051c5-050f-1a00-9d29-211026a181ef.jpg",
+    "MobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/502051c5-050f-1a00-9d29-211026a181ef.jpg",
+    "ShowPriceDevelopment": false,
+    "PriceDevelopmentDirection": 0,
+    "ContactInformation": {
+      "ContactAdId": 33789471,
+      "HasContactForm": true,
+      "ContactSiteId": 100,
+      "DefaultContactMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestTestDriveMessage": "Ich interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. \r\nIch würde gerne eine Probefahrt vereinbaren. Wäre das möglich? \r\nBitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "RequestAdditionalInfoMessage": "Guten Tag\r\nIch interessiere mich für das Fahrzeug Ineos Grenadier in Dielsdorf. Bitte nehmen Sie mit mir Kontakt auf.\r\nFreundliche Grüsse",
+      "AdvertiserInformation": {
+        "Name": "Hedin Automotive Dielsdorf",
+        "Street": null,
+        "ZipAndCity": "8157 Dielsdorf",
+        "Phone": "+41582697100"
+      }
+    },
+    "SourceLinks": [
+      {
+        "Title": "AutoScout24",
+        "Href": "/carfinder/redirect/tooriginalad?id=33789471",
+        "RedirectClickHandlerUrl": "/carfinder/api/redirectclick/save",
+        "EnableImpressionLog": false,
+        "IsAccountable": true,
+        "CampaignGuid": "7050c3fa-c448-4165-b601-f2c382ab8b1d",
+        "CustomParameters": {
+          "Adid": "33789471",
+          "clientenvironment": "web",
+          "isexclusive": "False"
+        },
+        "LogoUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/sourcelink_logo_100.jpg",
+        "IsClickable": true
+      }
+    ],
+    "FallbackImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/static/cf_placeholder_notext.svg",
+    "Status": 1,
+    "VehicleTypeEurotaxCode": 102231572
+  }
+]

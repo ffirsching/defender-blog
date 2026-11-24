@@ -3,7 +3,7 @@
     "title": "Land Rover Discovery 4.0 ES",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/33426158",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.748Z",
     "priceChf": 9999,
     "mileageKm": 125000,
     "year": 2001,
@@ -28,13 +28,14 @@
     "advertiserStreet": null,
     "advertiserZipAndCity": "1227 Les Acacias",
     "advertiserPhone": "+41768054529",
-    "createDate": "2026-08-07T17:08:32.483"
+    "createDate": "2026-08-07T17:08:32.483",
+    "priceHistory": []
   },
   {
     "title": "Land Rover Discovery 4.0 XS",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/33395863",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.748Z",
     "priceChf": 4200,
     "mileageKm": 241000,
     "year": 2001,
@@ -59,13 +60,14 @@
     "advertiserStreet": null,
     "advertiserZipAndCity": "8951 Fahrweid",
     "advertiserPhone": "+41767781007",
-    "createDate": "2026-07-29T14:12:35.303"
+    "createDate": "2026-07-29T14:12:35.303",
+    "priceHistory": []
   },
   {
     "title": "Land Rover Discovery 4.0 ES",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/33386669",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.748Z",
     "priceChf": 19000,
     "mileageKm": 230000,
     "year": 1999,
@@ -89,13 +91,14 @@
     "advertiserName": "Pierre",
     "advertiserStreet": null,
     "advertiserZipAndCity": "1222 Vesenaz",
-    "createDate": "2026-07-26T22:16:58.86"
+    "createDate": "2026-07-26T22:16:58.86",
+    "priceHistory": []
   },
   {
     "title": "Land Rover Discovery 4.0 S",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/33153975",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.648Z",
     "priceChf": 12500,
     "mileageKm": 200000,
     "year": 1999,
@@ -112,21 +115,27 @@
     "marketPrice": 0,
     "currency": "CHF",
     "comparisRating": -1,
-    "imageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/0fca3380-6599-cac0-5dcd-918ac623d93a.jpg",
-    "desktopImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/0fca3380-6599-cac0-5dcd-918ac623d93a.jpg",
-    "mobileImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/0fca3380-6599-cac0-5dcd-918ac623d93a.jpg",
+    "imageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cf6df699-96d6-8504-009b-f94fa7ae9142.jpg",
+    "desktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cf6df699-96d6-8504-009b-f94fa7ae9142.jpg",
+    "mobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cf6df699-96d6-8504-009b-f94fa7ae9142.jpg",
     "priceDevelopmentDirection": 0,
     "advertiserName": "Sport-Garage Uri GmbH",
     "advertiserStreet": "Grossriedstrasse 13",
     "advertiserZipAndCity": "6462 Seedorf",
-    "createDate": "2026-05-23T14:17:40.167"
+    "createDate": "2026-05-23T14:17:40.167",
+    "priceHistory": [
+      {
+        "priceChf": 12500,
+        "timestamp": "2026-11-23T20:17:07.748Z"
+      }
+    ]
   },
   {
     "title": "Land Rover Discovery 4.0 S",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/33014651",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
-    "priceChf": 11000,
+    "scrapedAt": "2026-11-23T20:17:07.648Z",
+    "priceChf": 10800,
     "mileageKm": 156000,
     "year": 1999,
     "transmission": "Automat",
@@ -142,21 +151,27 @@
     "marketPrice": 0,
     "currency": "CHF",
     "comparisRating": -1,
-    "imageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/e2981c92-4716-6cf9-cf46-972681fc7ca6.jpg",
-    "desktopImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/e2981c92-4716-6cf9-cf46-972681fc7ca6.jpg",
-    "mobileImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/e2981c92-4716-6cf9-cf46-972681fc7ca6.jpg",
-    "priceDevelopmentDirection": 0,
+    "imageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/e2981c92-4716-6cf9-cf46-972681fc7ca6.jpg",
+    "desktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/e2981c92-4716-6cf9-cf46-972681fc7ca6.jpg",
+    "mobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/e2981c92-4716-6cf9-cf46-972681fc7ca6.jpg",
+    "priceDevelopmentDirection": 2,
     "advertiserName": "Garage + Carrosserie Britschgi",
     "advertiserStreet": "Winkelbüel 1",
     "advertiserZipAndCity": "6043 Adligenswil",
     "advertiserPhone": "+41 41 516 23 50",
-    "createDate": "2026-04-15T10:03:21.13"
+    "createDate": "2026-04-15T10:03:21.13",
+    "priceHistory": [
+      {
+        "priceChf": 10800,
+        "timestamp": "2026-11-23T20:17:07.748Z"
+      }
+    ]
   },
   {
     "title": "Land Rover Discovery 4.0 ES",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/32953433",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.748Z",
     "priceChf": 19990,
     "mileageKm": 99000,
     "year": 2001,
@@ -181,13 +196,14 @@
     "advertiserStreet": null,
     "advertiserZipAndCity": "2562 Port BERN",
     "advertiserPhone": "+41787459696",
-    "createDate": "2026-03-27T19:12:17.743"
+    "createDate": "2026-03-27T19:12:17.743",
+    "priceHistory": []
   },
   {
     "title": "Land Rover Discovery 4.0 ES",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/32882596",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.648Z",
     "priceChf": 13000,
     "mileageKm": 170500,
     "year": 2000,
@@ -212,13 +228,19 @@
     "advertiserStreet": null,
     "advertiserZipAndCity": "9472 Grabs",
     "advertiserPhone": "+41788676137",
-    "createDate": "2026-03-11T13:12:28.33"
+    "createDate": "2026-03-11T13:12:28.33",
+    "priceHistory": [
+      {
+        "priceChf": 13000,
+        "timestamp": "2026-11-23T20:17:07.748Z"
+      }
+    ]
   },
   {
     "title": "Land Rover Discovery 2.5 Td5 HSE",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/32820616",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.748Z",
     "priceChf": 22900,
     "mileageKm": 142000,
     "year": 2003,
@@ -243,13 +265,14 @@
     "advertiserStreet": null,
     "advertiserZipAndCity": "8307 Effretikon",
     "advertiserPhone": "+41523437575",
-    "createDate": "2026-02-24T20:13:12.97"
+    "createDate": "2026-02-24T20:13:12.97",
+    "priceHistory": []
   },
   {
     "title": "Land Rover Discovery 2.5 Tdi A",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/32678035",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.648Z",
     "priceChf": 9900,
     "mileageKm": 235000,
     "year": 1998,
@@ -266,20 +289,26 @@
     "marketPrice": 0,
     "currency": "CHF",
     "comparisRating": -1,
-    "imageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/cafbb62c-600c-de2a-871c-7970add559c9.jpg",
-    "desktopImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/cafbb62c-600c-de2a-871c-7970add559c9.jpg",
-    "mobileImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/cafbb62c-600c-de2a-871c-7970add559c9.jpg",
+    "imageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cafbb62c-600c-de2a-871c-7970add559c9.jpg",
+    "desktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cafbb62c-600c-de2a-871c-7970add559c9.jpg",
+    "mobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/cafbb62c-600c-de2a-871c-7970add559c9.jpg",
     "priceDevelopmentDirection": 2,
     "advertiserName": "Timée",
     "advertiserStreet": null,
     "advertiserZipAndCity": "1880 Les Posses-sur-Bex",
-    "createDate": "2026-01-18T10:41:57.233"
+    "createDate": "2026-01-18T10:41:57.233",
+    "priceHistory": [
+      {
+        "priceChf": 9900,
+        "timestamp": "2026-11-23T20:17:07.748Z"
+      }
+    ]
   },
   {
     "title": "Land Rover Discovery 2.5 Td5 XS",
     "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/32476799",
     "source": "comparis",
-    "scrapedAt": "2026-08-09T20:03:02.452Z",
+    "scrapedAt": "2026-11-23T20:17:07.648Z",
     "priceChf": 10900,
     "mileageKm": 121594,
     "year": 2002,
@@ -296,14 +325,56 @@
     "marketPrice": 0,
     "currency": "CHF",
     "comparisRating": -1,
-    "imageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/9097b573-7904-7a7a-28ad-e8ae3ac4cb83.jpg",
-    "desktopImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/9097b573-7904-7a7a-28ad-e8ae3ac4cb83.jpg",
-    "mobileImageUrl": "https://assets-comparis.b-cdn.net/image/upload/v1/carfinder/Images/DataCollect/9097b573-7904-7a7a-28ad-e8ae3ac4cb83.jpg",
+    "imageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/9097b573-7904-7a7a-28ad-e8ae3ac4cb83.jpg",
+    "desktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/9097b573-7904-7a7a-28ad-e8ae3ac4cb83.jpg",
+    "mobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/9097b573-7904-7a7a-28ad-e8ae3ac4cb83.jpg",
     "priceDevelopmentDirection": 2,
     "advertiserName": "Garage & Autohaus Wiler GmbH",
     "advertiserStreet": null,
     "advertiserZipAndCity": "3428 Wiler bei Utzenstorf",
     "advertiserPhone": "+41798479762",
-    "createDate": "2025-11-17T12:48:18.72"
+    "createDate": "2025-11-17T12:48:18.72",
+    "priceHistory": [
+      {
+        "priceChf": 10900,
+        "timestamp": "2026-11-23T20:17:07.748Z"
+      }
+    ]
+  },
+  {
+    "title": "Land Rover Discovery 4.0 ES",
+    "url": "https://www.comparis.ch/carfinder/marktplatz/details/show/33648374",
+    "source": "comparis",
+    "scrapedAt": "2026-11-23T20:17:07.748Z",
+    "priceChf": 6999,
+    "mileageKm": 125000,
+    "year": 2001,
+    "transmission": "Automat",
+    "horsepower": 185,
+    "fuelType": "Benzin",
+    "location": "1227 (GE)",
+    "partnerName": "AutoScout24",
+    "make": "Land Rover",
+    "model": "Discovery",
+    "type": "Discovery 4.0 ES",
+    "vehicleType": "Occasion",
+    "bodyType": "suv",
+    "marketPrice": 0,
+    "currency": "CHF",
+    "comparisRating": -1,
+    "imageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/fc1f244c-9d21-d31c-e952-cbd654238582.jpg",
+    "desktopImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/fc1f244c-9d21-d31c-e952-cbd654238582.jpg",
+    "mobileImageUrl": "https://mapl-assets.b-cdn.net/carfinder/images/datacollect/fc1f244c-9d21-d31c-e952-cbd654238582.jpg",
+    "priceDevelopmentDirection": 2,
+    "advertiserName": "Leo Automobiles",
+    "advertiserStreet": "Route des Acacias 33",
+    "advertiserZipAndCity": "1227 Les Acacias",
+    "createDate": "2026-10-05T14:09:00.277",
+    "priceHistory": [
+      {
+        "priceChf": 6999,
+        "timestamp": "2026-11-23T20:17:07.748Z"
+      }
+    ]
   }
 ]
