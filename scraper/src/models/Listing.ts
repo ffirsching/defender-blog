@@ -28,4 +28,8 @@ export interface Listing {
   advertiserZipAndCity?: string;
   advertiserPhone?: string;
   createDate?: string;
+  priceHistory: Array<{
+    priceChf: number;
+    timestamp: string;
+  }>;
 }

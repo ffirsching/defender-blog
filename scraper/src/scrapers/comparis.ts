@@ -175,6 +175,7 @@ export function extractComparisListings(html: string): Listing[] {
           advertiserZipAndCity: normalizeText(typeof item.ContactInformation?.AdvertiserInformation?.ZipAndCity === 'string' ? item.ContactInformation.AdvertiserInformation.ZipAndCity : undefined),
           advertiserPhone: normalizeText(typeof item.ContactInformation?.AdvertiserInformation?.Phone === 'string' ? item.ContactInformation.AdvertiserInformation.Phone : undefined),
           createDate: typeof item.CreateDate === 'string' ? item.CreateDate : undefined,
+          priceHistory: [],
         });
       }
     }
@@ -223,6 +224,7 @@ export function extractComparisListings(html: string): Listing[] {
         url: normalizedUrl,
         source: 'comparis',
         scrapedAt: new Date().toISOString(),
+        priceHistory: [],
       });
     }
   }

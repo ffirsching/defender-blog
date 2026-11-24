@@ -42,6 +42,7 @@ export class AutoScout24Scraper extends BaseScraper {
           location: undefined,
           source: 'autoscout24',
           scrapedAt: new Date().toISOString(),
+          priceHistory: [],
         });
       });
 
